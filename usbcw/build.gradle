@@ -1,0 +1,48 @@
+//控制组件模式和集成模式
+apply plugin: 'com.android.library'
+android {
+    compileSdkVersion versionCompiler
+    buildToolsVersion versionBuildTool
+
+    compileOptions {
+        sourceCompatibility javaSourceCompatibility
+        targetCompatibility javaTargetCompatibility
+    }
+
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion versionTarget
+        versionCode 1
+        versionName "1.0"
+
+        //设置支持的SO库架构（开发者可以根据需要，选择一个或多个平台的so）
+        ndk {
+            // 设置支持的SO库架构   abiFilters  "armeabi", "armeabi-v7a", "arm64-v8a"
+            abiFilters "armeabi", "armeabi-v7a", "arm64-v8a"
+        }
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    //jdk1.8
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+}
